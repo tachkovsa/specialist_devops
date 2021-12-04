@@ -1,56 +1,57 @@
----
-- name: Update all packages to their latest version
-  apt:
-    name: "*"
-    state: latest
-    update_cache: yes
-
-- name: Install a list of packages
-  apt:
-    name:
-      - nano
-      - mc
-      - wget
-      - htop
-      - glances
-      - ntp
-    state: present
-
-- name: Install a list of packages
-  apt: name="{{ packages }}" state=present
+# ---
+# - name: Update all packages to their latest version
+#   apt:
+#     name: "*"
+#     state: latest
+#     update_cache: yes
 
 # - name: Install a list of packages
 #   apt:
-#     name: "{{ item }}"
+#     name:
+#       - nano
+#       - mc
+#       - wget
+#       - htop
+#       - glances
+#       - ntp
 #     state: present
-#   loop:
-#     - nano
-#     - mc
-#     - wget
-#     - htop
-#     - glances
 
-- name: Add the user admin
-  ansible.builtin.user:
-    name: admin
-    shell: /bin/bash
-    groups: sudo,docker
-    state: present
-    password: $6$sdvn2398ufjpe$KoQjwICcmHk152LE8wxC7qvwbYOYspA591qCL09oXDqqGJXfFhI2lSEg5i7i/kRMxDtlyEzFaIx0dW9ujJCjP1
+# - name: Install a list of packages
+#   apt: name="{{ packages }}" state=present
 
-- name: Set authorized key
-  authorized_key:
-    user: admin
-    state: present
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDSAoV6dFjnrx/9IM4TKlAGzUfAF4lqw8n7AZR/dbz3Ppa5nsq/WbYBGUROkGOR8lhKBB4wExikhaVWivZt3OseC9oposqyaTfpZWuFGKHJYoUGx7uhFs6JYoLTnq/W9XS+zjJVPcL8qxreDW0kES/ijMNzfc6qOgbWc2GAUMaGfnxx9XUntSGwmqCLS5+eHft4aA/5s7+wQhRTA78jG8wgBsWDH6YUnzm0aLqswCeAceD0MIYFamThGgYwPFR/4oaxDs2TpnTjlrCf0smdsh2eLgD2OO0xlz76FLh9lcSuJcYkBvW7tYz7bIRRnaXUV1ErGvVZhVZq/6P1pqTWSegTe0eYnLoUufRmu8O2Ke8tVXd5EXyRuJGAn9F97CguaA7T8ZHUL4Z0g8e5dse8uVEWB5h2qLdqOyWr2utg6jBzo2gDbQSFWpttDmuiJKnMbpr5Cx/4GZLs4CDnhX+WvoE63cIStP6dg1zrrZWu2rGRwBpPZypb8+y2oXY9rPjzSjtewxA91qLT/q6av/zRl7jmdZHtZ8NArPGh3s87qEXHbyXU0BZZjdKsjVFBrArTl6oKnafFHcJmYFXOsOMoGMn5QPRH2Yh6TBCSIscvilpCgiKQWzpQc63lBWukluYmste1BJfG0xUFTZdqu7Ue6kKGl90FP8dWT02ZdITjqqHm+Q== root@ubuntu1
+# # - name: Install a list of packages
+# #   apt:
+# #     name: "{{ item }}"
+# #     state: present
+# #   loop:
+# #     - nano
+# #     - mc
+# #     - wget
+# #     - htop
+# #     - glances
 
-- name: Template a file to /etc/ntp.conf
-  ansible.builtin.template:
-    src: ntp.conf.j2
-    dest: /etc/ntp.conf
-    owner: root
-    group: sudo
-    mode: 0644
+# - name: Add the user admin
+#   ansible.builtin.user:
+#     name: admin
+#     shell: /bin/bash
+#     groups: sudo,docker
+#     state: present
+#     password: $6$sdvn2398ufjpe$KoQjwICcmHk152LE8wxC7qvwbYOYspA591qCL09oXDqqGJXfFhI2lSEg5i7i/kRMxDtlyEzFaIx0dW9ujJCjP1
 
-# ansible all -i localhost, -m debug -a "msg={{ '12345678' | password_hash('sha512', 'sdvn2398ufjpe') }}"
-# ansible-playbook playbooks/major-default-new-server.yaml -u root -k
+# - name: Set authorized key
+#   authorized_key:
+#     user: admin
+#     state: present
+#     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDSAoV6dFjnrx/9IM4TKlAGzUfAF4lqw8n7AZR/dbz3Ppa5nsq/WbYBGUROkGOR8lhKBB4wExikhaVWivZt3OseC9oposqyaTfpZWuFGKHJYoUGx7uhFs6JYoLTnq/W9XS+zjJVPcL8qxreDW0kES/ijMNzfc6qOgbWc2GAUMaGfnxx9XUntSGwmqCLS5+eHft4aA/5s7+wQhRTA78jG8wgBsWDH6YUnzm0aLqswCeAceD0MIYFamThGgYwPFR/4oaxDs2TpnTjlrCf0smdsh2eLgD2OO0xlz76FLh9lcSuJcYkBvW7tYz7bIRRnaXUV1ErGvVZhVZq/6P1pqTWSegTe0eYnLoUufRmu8O2Ke8tVXd5EXyRuJGAn9F97CguaA7T8ZHUL4Z0g8e5dse8uVEWB5h2qLdqOyWr2utg6jBzo2gDbQSFWpttDmuiJKnMbpr5Cx/4GZLs4CDnhX+WvoE63cIStP6dg1zrrZWu2rGRwBpPZypb8+y2oXY9rPjzSjtewxA91qLT/q6av/zRl7jmdZHtZ8NArPGh3s87qEXHbyXU0BZZjdKsjVFBrArTl6oKnafFHcJmYFXOsOMoGMn5QPRH2Yh6TBCSIscvilpCgiKQWzpQc63lBWukluYmste1BJfG0xUFTZdqu7Ue6kKGl90FP8dWT02ZdITjqqHm+Q== root@ubuntu1
+
+# - name: Template a file to /etc/ntp.conf
+#   ansible.builtin.template:
+#     src: ntp.conf.j2
+#     dest: /etc/ntp.conf
+#     owner: root
+#     group: sudo
+#     mode: 0644
+
+# # ansible all -i localhost, -m debug -a "msg={{ '12345678' | password_hash('sha512', 'sdvn2398ufjpe') }}"
+# # ansible-playbook playbooks/major-default-new-server.yaml -u root -k
+

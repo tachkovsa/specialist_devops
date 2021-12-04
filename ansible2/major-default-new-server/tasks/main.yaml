@@ -19,16 +19,16 @@
 # - name: Install a list of packages
 #   apt: name="{{ packages }}" state=present
 
-# # - name: Install a list of packages
-# #   apt:
-# #     name: "{{ item }}"
-# #     state: present
-# #   loop:
-# #     - nano
-# #     - mc
-# #     - wget
-# #     - htop
-# #     - glances
+# - name: Install a list of packages
+#   apt:
+#     name: "{{ item }}"
+#     state: present
+#   loop:
+#     - nano
+#     - mc
+#     - wget
+#     - htop
+#     - glances
 
 # - name: Add the user admin
 #   ansible.builtin.user:
@@ -52,8 +52,8 @@
 #     group: sudo
 #     mode: 0644
 
-# # ansible all -i localhost, -m debug -a "msg={{ '12345678' | password_hash('sha512', 'sdvn2398ufjpe') }}"
-# # ansible-playbook playbooks/major-default-new-server.yaml -u root -k
+# ansible all -i localhost, -m debug -a "msg={{ '12345678' | password_hash('sha512', 'sdvn2398ufjpe') }}"
+# ansible-playbook playbooks/major-default-new-server.yaml -u root -k
 
 # - name: get_facts
 #   setup:
@@ -88,4 +88,3 @@
     owner: root
     group: root
     mode: 0755
-    

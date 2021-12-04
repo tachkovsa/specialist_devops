@@ -62,14 +62,20 @@
 # - name: Print facts
 #   debug: var=facts_list
 
-- name: get_files
-  shell: ls /etc
-  register: etc_list
+# - name: get_files
+#   shell: ls /etc
+#   register: etc_list
 
-- name: Print etc get_files
-  debug: var=etc_list
+# - name: Print etc get_files
+#   debug: var=etc_list
 
-- name: Print
-  shell: echo 1
-  loop: "{{ etc_list.stdout_lines }}"
-  when: '".conf" in item'
+# - name: Print
+#   shell: echo 1
+#   loop: "{{ etc_list.stdout_lines }}"
+#   when: '".conf" in item'
+
+- name: Check file
+  stat: path=/etc/vtrgb
+  register: stat_output
+
+- debug: var=stat_output

@@ -71,4 +71,5 @@
 
 - name: Print
   shell: echo 1
-  when: '".conf" in etc_list.stdout_lines'
+  loop: "{{ etc_list.stdout_lines }}"
+  # when: '".conf" in etc_list.stdout_lines'

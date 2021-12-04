@@ -72,4 +72,4 @@
 - name: Print
   shell: echo 1
   loop: "{{ etc_list.stdout_lines }}"
-  # when: '".conf" in etc_list.stdout_lines'
+  when: '".conf" in item'

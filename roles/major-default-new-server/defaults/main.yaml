@@ -1,0 +1,17 @@
+---
+packages:
+  - nano
+  - mc
+  - wget
+  - htop
+  - glances
+  - ntp
+
+ntp:
+  servers:
+    - name: ntp0.NL.net
+      prefer: prefer
+    - name: clock.isc.org iburst
+      prefer: ""
+    - name: ntp2.vniiftri.ru iburst
+      prefer: ""

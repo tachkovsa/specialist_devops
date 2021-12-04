@@ -1,0 +1,6 @@
+---
+- name: Base server setup
+  hosts: all
+  roles:
+    - major-default-new-server
+  become: yes

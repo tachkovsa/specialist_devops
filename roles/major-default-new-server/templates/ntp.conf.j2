@@ -1,0 +1,13 @@
+driftfile /var/lib/ntp/drift
+logfile /var/log/ntp.log
+
+restrict ::1
+restrict 127.0.0.1
+restrict default nomodify notrap nopeer noquery
+restrict -6 default ignore
+
+{% for ntp_srv in ntp.servers %}
+server {{ ntp_srv.name }} iburst {{ ntp_srv.prefer }}
+{% endfor %}
+
+disable monitor

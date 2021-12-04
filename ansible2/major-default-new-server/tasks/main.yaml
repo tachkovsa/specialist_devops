@@ -55,9 +55,20 @@
 # # ansible all -i localhost, -m debug -a "msg={{ '12345678' | password_hash('sha512', 'sdvn2398ufjpe') }}"
 # # ansible-playbook playbooks/major-default-new-server.yaml -u root -k
 
-- name: get_facts
-  setup:
-  register: facts_list
+# - name: get_facts
+#   setup:
+#   register: facts_list
 
-- name: Print facts
-  debug: var=facts_list
+# - name: Print facts
+#   debug: var=facts_list
+
+- name: get_files
+  shell: ls /etc
+  register: etc_list
+
+- name: Print etc get_files
+  debug: var=etc_list
+
+- name: Print
+  shell: echo 1
+  when: '".conf" in etc_list.stdout_lines'

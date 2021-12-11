@@ -21,11 +21,11 @@ spec:
           image: nginx:1.18
           ports:
             - containerPort: 80
-          # volumeMounts:
-          #   - name: config
-          #     mountPath: "/tmp/cm"
-          #     readOnly: true
-      # volumes:
-      #   - name: config
-      #     configMap:
-      #       name: nginx-configmap
+          volumeMounts:
+            - name: config
+              mountPath: "/tmp/cm"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-configmap

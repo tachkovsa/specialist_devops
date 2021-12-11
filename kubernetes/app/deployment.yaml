@@ -10,6 +10,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  # template = POD
   template:
     metadata:
       labels:
@@ -23,7 +24,7 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config
-              mountPath: "/tmp/cm"
+              mountPath: "/etc/nginx/conf.d"
               readOnly: true
       volumes:
         - name: config

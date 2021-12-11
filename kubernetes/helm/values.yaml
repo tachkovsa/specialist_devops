@@ -1,0 +1,8 @@
+---
+storageclass:
+  - name: test-class1
+    reclaimPolicy: Delete
+    allowVolumeExpansion: true
+  - name: test-class2
+    reclaimPolicy: Retain
+    allowVolumeExpansion: false
